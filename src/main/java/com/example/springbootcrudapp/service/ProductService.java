@@ -39,16 +39,18 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Product product) {
-        validateId(product.getId());
+    public Product updateProduct(Product product, String id) {
+        validateId(id);
         validatePrice(product.getPrice());
 
-        Product productToUpdate = getProductById(product.getId());
+        Product productToUpdate = getProductById(id);
 
-        product.setVersion(productToUpdate.getVersion());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setProductName(product.getProductName());
+        productToUpdate.setManufacturer(product.getManufacturer());
 
-        productRepository.updateProduct(product);
-        return getProductById(product.getId());
+        productRepository.updateProduct(productToUpdate);
+        return getProductById(id);
     }
 
     public void deleteProduct(String id) {

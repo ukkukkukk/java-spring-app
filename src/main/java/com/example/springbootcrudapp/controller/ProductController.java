@@ -58,7 +58,7 @@ public class ProductController {
     @PutMapping("/products/{id}")
     public Product updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
         try {
-            return productService.updateProduct(product);
+            return productService.updateProduct(product, id);
         } catch (DatabaseOperationException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database operation failed", e);
         } catch (EntityNotFoundException e) {
